@@ -1,5 +1,14 @@
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
 .linechart_path {
     fill: none;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: dash 5s linear forwards;
 }
 .linechart_axis {
 }

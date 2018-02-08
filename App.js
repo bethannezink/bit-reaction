@@ -18,7 +18,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="header">Test Line Chart</div>
+        <div className="header"></div>
         <LineChart data={this.createDummyData()} />
       </div>
     );
