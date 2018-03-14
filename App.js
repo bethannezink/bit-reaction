@@ -1,13 +1,43 @@
 import React, { Component } from 'react';
 import LineChart from './components/LineChart.js'
 
-class App extends Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {};
   }
 
+  componentDidMount() {
+    this.setTimer();
+  }
+  
+  componentWillUnmount() {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
+  }
+
+  setTimer() {
+    clearTimeout(this.timeout);
+    this.timeout = setTimeout(this.updatePrice.bind(this), 60000);
+  }
+
+  updatePrice() {
+    this.setState(this.getPrice, this.setTimer);
+  }
+
+  getPrice() {
+
+    fetch("https://api.coindesk.com/v1/bpi/currentprice.json")
+    .then(response => response.json())
+    .then(data => {
+      let price = data.bpi.USD.rate_float;
+      return parseFloat(price.toFixed(2));
+    })
+    .catch(error => {
+      console.log(error);
+    });
+    
+  }
 
   createDummyData() {
     const data = [];
@@ -22,23 +52,12 @@ class App extends Component {
     return data;
   }
 
-  componentDidMount() {
-    fetch("https://api.coindesk.com/v1/bpi/currentprice.json")
-    .then(response => response.json())
-    .then(data => {
-      let price = data.bpi.USD.rate_float;
-      console.log(data);
-      console.log(price);
-      this.setState({data});
-    });
-
-  }
-
   render() {
     return (
       <div className="App">
         <div className="header"></div>
-        <LineChart data={this.createDummyData()} />
+        <div>test</div>
+        {/* <LineChart data={price} /> */}
       </div>
     );
   }

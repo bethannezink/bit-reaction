@@ -36,7 +36,7 @@ class LineChart extends Component {
         });
 
         return (
-            <path className="linechart_path" d={pathD} stroke="red" strokeWidth="4" fill="none" />
+            <path className="linechart_path" d={pathD} stroke="red" strokeWidth="10" fill="none" />
         );
     }
     makeAxis() {
@@ -69,7 +69,7 @@ class LineChart extends Component {
 
 LineChart.defaultProps = {
     data: [],
-    color: '#2196F3',
+    color: 'black',
     svgHeight: 300,
     svgWidth: 700
 }
